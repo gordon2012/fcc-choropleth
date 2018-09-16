@@ -1,11 +1,12 @@
 let data = {};
 
 // Resizing variables
-const maxW = 2000;
-const maxH = 1500;
+const maxW = 1000;
+const maxH = 600;
 
-const maxPadding = 75;
-const minPadding = 75;
+const maxPadding = {t: 30, r: 20, b: 90, l: 40};
+const minPadding = {t: 30, r: 20, b: 90, l: 40};
+
 const wrapPadding = 15;
 
 let w = maxW;
@@ -38,7 +39,7 @@ var drawMap = debounce(function () {
     const titleStyle = getComputedStyle(title);
     const titleHeight = title.offsetHeight + parseInt(titleStyle.marginTop) + parseInt(titleStyle.marginBottom);
 
-    if(window.innerWidth < maxW + 2 * maxPadding) {
+    if(window.innerWidth < maxW + maxPadding.t + maxPadding.b) {
         w = window.innerWidth - (wrapPadding * 2);
         h = window.innerHeight - titleHeight - (wrapPadding * 2);
         padding = minPadding;
@@ -64,21 +65,21 @@ const renderMap = () => {
     // x axis
     const xScale = d3.scaleLinear()
         .domain([0, 1])
-        .range([padding, w - padding])
+        .range([padding.l, w - padding.r])
     const xAxis = d3.axisBottom(xScale)
         // .tickFormat(d3.format('d'));
     svg.append('g')
-        .attr('transform', `translate(0, ${h - padding})`)
+        .attr('transform', `translate(0, ${h - padding.b})`)
         .attr('id', 'x-axis')
         .call(xAxis);
 
     // y axis
     const yScale = d3.scaleLinear()
         .domain([0, 1])
-        .range([padding, h - padding]);
+        .range([padding.t, h - padding.b]);
     const yAxis = d3.axisLeft(yScale);
     svg.append('g')
-        .attr('transform', `translate(${padding}, 0)`)
+        .attr('transform', `translate(${padding.l}, 0)`)
         .attr('id', 'y-axis')
         .call(yAxis);
 
@@ -92,11 +93,11 @@ const renderMap = () => {
         .domain([0,1]);
     svg.append('g')
         .attr('id', 'legend')
-        .attr('transform', `translate(${padding}, ${h - padding + (padding / 3)})`);
+        .attr('transform', `translate(${padding.l}, ${h - padding.b + 35})`);
     var legend = d3.legendColor()
         .cells(10)
         .shapePadding(0)
-        .shapeWidth(((w-padding*2) / 10))
+        .shapeWidth(((w - padding.l - padding.r) / 10))
         .orient('horizontal')
         .scale(legendScale);
     svg.select('#legend')
