@@ -104,6 +104,15 @@ const renderMap = () => {
         .call(legend);
 
     // Visualization
+
+    // var baseMap = d3.geoAlbersUsa();
+    // var path = d3.geoPath(baseMap);
+    // TODO
+    // var projection = d3.geoMercator()
+
+
+    var path = d3.geoPath()
+        .projection(projection);
 };
 
 (async () => {
