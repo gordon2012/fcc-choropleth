@@ -105,14 +105,52 @@ const renderMap = () => {
 
     // Visualization
 
-    // var baseMap = d3.geoAlbersUsa();
+    // var albers = d3.geoAlbersUsa();
+
+    // console.log(albers([1]));
+
+    // console.log(baseMap);
     // var path = d3.geoPath(baseMap);
+
+
+
+
     // TODO
     // var projection = d3.geoMercator()
 
 
-    var path = d3.geoPath()
-        .projection(projection);
+    // var path = d3.geoPath()
+    //     .projection(projection);
+
+
+    // svg.append('g')
+    //     .selectAll('path')
+    //     .data(d3.geoAlbersUsa())
+    //     .enter()
+    //     .append('path')
+    //     .attr('d', d3.geoPath());
+
+
+    // var projection = d3.geoMercator();
+    // var path = d3.geoPath()
+    //     .projection(projection);
+
+    // svg.append('path')
+    //     .attr('d', path(data.counties));
+
+    svg.append('g')
+        .attr('fill', '#000')
+        .selectAll('path')
+        .data(topojson.feature(data.counties, data.counties.objects.counties).features)
+        .enter()
+        .append('path')
+            .attr('d', d3.geoPath());
+
+
+
+
+
+
 };
 
 (async () => {
