@@ -138,13 +138,19 @@ const renderMap = () => {
     // svg.append('path')
     //     .attr('d', path(data.counties));
 
+    var projection = d3.geoAlbersUsa()
+        .scale(300);
+    var path = d3.geoPath()
+        .projection(projection);
+
     svg.append('g')
         .attr('fill', '#000')
         .selectAll('path')
         .data(topojson.feature(data.counties, data.counties.objects.counties).features)
         .enter()
         .append('path')
-            .attr('d', d3.geoPath());
+            // .attr('d', d3.geoPath());
+            .attr('d', path);
 
 
 
