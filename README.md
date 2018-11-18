@@ -6,4 +6,4 @@
 
 <http://choropleth.gordonscampinggear.com>
 
-![Choropleth Map](http://gordonscampinggear.com/img/choropleth.png)
+![Choropleth Map](https://portfolio.gordondoskas.com/img/choropleth.png)
